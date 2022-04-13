@@ -11,14 +11,15 @@ import javax.persistence.Entity;
 @Entity
 public class User {
 
-    private long id;
+    private long userNo;
     private String userId;
     private String password;
     private String name;
     private String regNo;
 
     @Builder
-    public User(String userId, String password, String name, String regNo){
+    public User(long userNo, String userId, String password, String name, String regNo){
+        this.userNo = userNo;
         this.userId = userId;
         this.password = password;
         this.name = name;
