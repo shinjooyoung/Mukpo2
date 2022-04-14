@@ -1,4 +1,4 @@
-package com.sts.refund.response;
+package com.sts.refund.web.response;
 
 import lombok.Builder;
 import lombok.Getter;

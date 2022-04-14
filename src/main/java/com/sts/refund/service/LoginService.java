@@ -13,7 +13,7 @@ public class LoginService {
 
     private final UserRepository userRepository;
 
-    public Optional<User> findById(String userId){
-        return userRepository.findById(userId);
+    public Optional<User> findById(long id){
+        return userRepository.findById(id);
     }
 }

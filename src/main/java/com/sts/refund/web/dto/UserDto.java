@@ -16,7 +16,6 @@ public class UserDto
     private String password;
     private String name;
     private String regNo;
-    private long userNo;
 
     @Builder
     public UserDto(String userId, String password, String name, String regNo, long userNo){
@@ -24,7 +23,6 @@ public class UserDto
         this.password = password;
         this.name = name;
         this.regNo = regNo;
-        this.userNo = userNo;
     }
 
     public static UserDto of(User user){
@@ -32,7 +30,6 @@ public class UserDto
                 .userId(user.getUserId())
                 .name(user.getName())
                 .regNo(user.getRegNo())
-                .userNo(user.getUserNo())
                 .build();
     }
 

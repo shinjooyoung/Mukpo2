@@ -20,8 +20,8 @@ public class UserService {
         userRepository.save(userDto.toEntity());
     }
 
-    public Optional<User> findById(String userId) {
-        return userRepository.findById(userId);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
 
