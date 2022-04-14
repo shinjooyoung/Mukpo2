@@ -2,11 +2,9 @@ package com.sts.refund.web.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidParameterException;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
@@ -60,6 +58,18 @@ public class JwtTokenProvider {
             return false;
         }
 
+    }
+
+    public String getUserId(String token){
+        return getBody(token).getSubject();
+    }
+
+    private Claims getBody(String token){
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignInKey(secretKey))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
     
 }

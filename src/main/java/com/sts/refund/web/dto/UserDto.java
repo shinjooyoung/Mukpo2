@@ -46,7 +46,7 @@ public class UserDto
         this.password = password;
     }
 
-    public void regNoEncoding(String regNo){
+    public void setRegNo(String regNo){
         this.regNo = regNo;
     }
 }
