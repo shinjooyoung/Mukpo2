@@ -1,10 +1,7 @@
 package com.sts.refund.web.jwt;
 
-import com.sts.refund.domain.UserRepository;
-import com.sts.refund.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 

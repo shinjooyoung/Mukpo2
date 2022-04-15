@@ -1,7 +1,6 @@
 package com.sts.refund.service;
 
-import com.sts.refund.domain.User;
-import com.sts.refund.domain.UserRepository;
+import com.sts.refund.repository.UserRepository;
 import com.sts.refund.web.aes.AES256Util;
 import com.sts.refund.web.dto.UserDto;
 import com.sts.refund.web.jwt.JwtTokenProvider;
@@ -9,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

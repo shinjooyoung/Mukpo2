@@ -1,7 +1,7 @@
 package com.sts.refund.service;
 
 import com.sts.refund.domain.User;
-import com.sts.refund.domain.UserRepository;
+import com.sts.refund.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

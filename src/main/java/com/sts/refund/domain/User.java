@@ -3,11 +3,13 @@ package com.sts.refund.domain;
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 
+/**
+ *
+ */
 @Getter
 @Entity
 public class User {
@@ -30,7 +32,8 @@ public class User {
 
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "aggregateIncomeTax_id")
-    private AggregateIncomeTax aggregateIncomeTax;
+    private EarnedIncome aggregateIncomeTax;
+
 
     @Builder
     public User(long id, String userId, String password, String name, String regNo){
@@ -40,5 +43,7 @@ public class User {
         this.name = name;
         this.regNo = regNo;
     }
+
+
 
 }

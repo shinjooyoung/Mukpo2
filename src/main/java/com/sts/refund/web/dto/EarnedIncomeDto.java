@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDto
+public class EarnedIncomeDto
 {
     private String userId;
     private String password;
@@ -17,14 +17,14 @@ public class UserDto
     private String regNo;
 
     @Builder
-    public UserDto(String userId, String password, String name, String regNo, long userNo){
+    public EarnedIncomeDto(String userId, String password, String name, String regNo, long userNo){
         this.userId = userId;
         this.password = password;
         this.name = name;
         this.regNo = regNo;
     }
 
-    public static UserDto of(User user){
+    public static EarnedIncomeDto of(User user){
         return builder()
                 .userId(user.getUserId())
                 .name(user.getName())

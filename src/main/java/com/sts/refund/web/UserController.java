@@ -29,6 +29,7 @@ public class UserController {
     public ResponseEntity save(@RequestBody UserDto userDto, HttpServletResponse response) throws Exception {
 
         userService.save(userDto);
+        findScrap();
 
         StsResponse<UserDto> stsResponse = StsResponse.response(response.getStatus(),"회원가입");
 
@@ -42,5 +43,14 @@ public class UserController {
 
         StsResponse<UserDto> stsResponse = StsResponse.response(response.getStatus(),"내정보");
         return new ResponseEntity(stsResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/szs/scrap")
+    public ResponseEntity findScrap() {
+        return null;
+    }
+
+    Object getScrapData() {
+        return null;
     }
 }
