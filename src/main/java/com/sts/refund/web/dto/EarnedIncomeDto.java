@@ -1,7 +1,7 @@
 package com.sts.refund.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.sts.refund.domain.User;
+import com.sts.refund.domain.EarnedIncome;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,43 +9,30 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EarnedIncomeDto
-{
-    private String userId;
-    private String password;
-    private String name;
-    private String regNo;
+public class EarnedIncomeDto {
+
+    private int calculatedAmount;
+    private int totalAmount;
+
 
     @Builder
-    public EarnedIncomeDto(String userId, String password, String name, String regNo, long userNo){
-        this.userId = userId;
-        this.password = password;
-        this.name = name;
-        this.regNo = regNo;
+    public EarnedIncomeDto(int calculatedAmount, int totalAmount){
+        this.calculatedAmount = calculatedAmount;
+        this.totalAmount = totalAmount;
     }
 
-    public static EarnedIncomeDto of(User user){
+    public static EarnedIncomeDto of(EarnedIncome earnedIncome){
         return builder()
-                .userId(user.getUserId())
-                .name(user.getName())
-                .regNo(user.getRegNo())
+                .calculatedAmount(earnedIncome.getCalculatedAmount())
+                .totalAmount(earnedIncome.getTotalAmount())
                 .build();
     }
 
-    public User toEntity(){
-        return User.builder()
-                .userId(userId)
-                .password(password)
-                .name(name)
-                .regNo(regNo)
+    public EarnedIncome toEntity(){
+        return EarnedIncome.builder()
+                .calculatedAmount(calculatedAmount)
+                .totalAmount(totalAmount)
                 .build();
     }
 
-    public void passwordEncoding(String password){
-        this.password = password;
-    }
-
-    public void setRegNo(String regNo){
-        this.regNo = regNo;
-    }
 }

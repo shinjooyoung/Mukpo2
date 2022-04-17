@@ -3,19 +3,18 @@ package com.sts.refund.domain;
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
-
-/**
- *
- */
+@NoArgsConstructor
 @Getter
 @Entity
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GENERATOR")
     private long id;
 
     @Column(unique = true)
@@ -31,19 +30,21 @@ public class User {
     private String regNo;
 
     @OneToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name = "aggregateIncomeTax_id")
-    private EarnedIncome aggregateIncomeTax;
+    @JoinColumn(name = "earnedIncome_id")
+    private EarnedIncome earnedIncome;
 
 
     @Builder
-    public User(long id, String userId, String password, String name, String regNo){
+    public User(long id, String userId, String password, String name, String regNo, EarnedIncome earnedIncome){
         this.id = id;
         this.userId = userId;
         this.password = password;
         this.name = name;
         this.regNo = regNo;
+        this.earnedIncome = earnedIncome;
     }
 
-
-
+    public void setEarnedIncome(EarnedIncome earnedIncome) {
+        this.earnedIncome = earnedIncome;
+    }
 }

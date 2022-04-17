@@ -1,14 +1,11 @@
-package com.sts.refund.web.jwt;
+package com.sts.refund.web.interceptor;
 
+import com.sts.refund.web.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Slf4j
 @RequiredArgsConstructor
 public class LoginAuthInterceptor implements HandlerInterceptor {
 
@@ -18,16 +15,8 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
 
-        log.info("인증 체크 인터셉터 실행 {}", requestURI);
-
-
-        if (!(handler instanceof HandlerMethod)) {
-            return true;
-        }
-
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
         String token = request.getHeader("Authorization");
-        if(jwtTokenProvider.validateToken(token)){
+        if(jwtTokenProvider.validToken(token)){
             String userId = jwtTokenProvider.getUserId(token);
             request.setAttribute("userId", userId);
             return true;

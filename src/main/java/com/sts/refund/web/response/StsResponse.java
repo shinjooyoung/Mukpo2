@@ -2,7 +2,6 @@ package com.sts.refund.web.response;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.http.ResponseEntity;
 
 @Getter
 @Builder
