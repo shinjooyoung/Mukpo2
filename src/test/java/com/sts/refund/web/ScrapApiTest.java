@@ -1,21 +1,18 @@
 package com.sts.refund.web;
 
-import com.sts.refund.domain.DomainConfig;
-import com.sts.refund.domain.TaxCreditFactory;
-import com.sts.refund.web.dto.EarnedIncomeDto;
-import com.sts.refund.web.jwt.JwtTokenProvider;
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 스크랩 데이터 호출 테스트
+ */
 class ScrapApiTest {
 
     @Test

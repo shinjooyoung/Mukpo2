@@ -9,6 +9,9 @@ import java.security.InvalidParameterException;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * JWT 테스트
+ */
 class JwtTokenProviderTest {
 
 

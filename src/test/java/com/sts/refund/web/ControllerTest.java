@@ -30,6 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * 회원가입, 로그인, 회원 검증, 회원정보 조회, 유저정보 스크랩, 환급액 계산 테스트
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class ControllerTest {

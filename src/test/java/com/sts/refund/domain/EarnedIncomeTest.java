@@ -9,6 +9,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import static org.assertj.core.api.Assertions.*;
 
+/**
+ * 환급액 계산테스트
+ */
 class EarnedIncomeTest {
 
     TaxCreditFactory taxCreditFactory;

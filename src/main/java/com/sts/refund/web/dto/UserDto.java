@@ -6,7 +6,6 @@ import com.sts.refund.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.util.Map;
 /**
  * 회원정보 DTO
  */
-@ToString
+
 @Getter
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)

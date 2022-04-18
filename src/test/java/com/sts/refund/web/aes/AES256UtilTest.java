@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
+/**
+ * 암호화 테스트
+ */
 class AES256UtilTest {
 
     @Test
