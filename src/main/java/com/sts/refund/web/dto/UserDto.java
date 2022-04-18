@@ -11,12 +11,16 @@ import lombok.ToString;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 회원정보 DTO
+ */
 @ToString
 @Getter
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto
 {
+
     private String userId;
     private String password;
     private String name;
@@ -35,16 +39,25 @@ public class UserDto
         this.userNo = userNo;
     }
 
+    /**
+     * User Entity를 UserDto로 변환
+     * @param user 
+     * @return
+     */
     public static UserDto of(User user){
         return builder()
                 .userId(user.getUserId())
                 .name(user.getName())
                 .regNo(user.getRegNo())
-                .earnedIncomeDto(EarnedIncomeDto.of(user.getEarnedIncome()))
+                .earnedIncomeDto(user.getEarnedIncome() != null ? EarnedIncomeDto.of(user.getEarnedIncome()): null)
                 .userNo(user.getId())
                 .build();
     }
 
+    /**
+     * User Entity 변환
+     * @return 
+     */
     public User toEntity(){
         return User.builder()
                 .userId(userId)
@@ -58,6 +71,10 @@ public class UserDto
         this.earnedIncomeDto = earnedIncomeDto;
     }
 
+    /**
+     * 비밀번호 암호화
+     * @param password
+     */
     public void passwordEncoding(String password){
         this.password = password;
     }
@@ -66,6 +83,10 @@ public class UserDto
         this.regNo = regNo;
     }
 
+    /**
+     * 가입 가능 유저 검증
+     * @return
+     */
     @AssertTrue
     public boolean isValidUser() {
         Map<String, String> userMap = new HashMap<>(){{

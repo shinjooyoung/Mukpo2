@@ -2,12 +2,10 @@ package com.sts.refund.domain;
 
 import com.sts.refund.domain.taxcredit.TaxCredit;
 import com.sts.refund.domain.taxcreditlimit.TaxCreditLimit;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
-@Slf4j
 @Component
 public class TaxCreditFactory {
 
@@ -18,7 +16,6 @@ public class TaxCreditFactory {
     public TaxCreditFactory(List<TaxCredit> taxCredits, List<TaxCreditLimit> taxCreditLimits) {
         this.taxCredits = taxCredits;
         this.taxCreditLimits = taxCreditLimits;
-        log.debug("[TaxCreditFactory] taxCredits={}, TaxCreditLimit={}", taxCredits.size(), taxCreditLimits.size());
     }
 
     /**
@@ -26,14 +23,13 @@ public class TaxCreditFactory {
      * @param calculatedAmount 산출세액
      * @return
      */
-    public TaxCredit createTaxCredit(int calculatedAmount) {
+    public TaxCredit createTaxCredit(int calculatedAmount) throws IllegalAccessException {
         for (TaxCredit taxCredit : taxCredits) {
-            log.debug("[TaxCreditFactory] TaxCredit={}", taxCredit.getClass());
             if(taxCredit.isSatisIedBy(calculatedAmount)){
                 return taxCredit;
             }
         }
-        return null;
+        throw new IllegalAccessException("잘못된 요청입니다.");
     }
 
     /**
@@ -41,13 +37,12 @@ public class TaxCreditFactory {
      * @param totalAmount 총급여액
      * @return
      */
-    public TaxCreditLimit createTaxCreditLimit(int totalAmount) {
+    public TaxCreditLimit createTaxCreditLimit(int totalAmount) throws IllegalAccessException {
         for (TaxCreditLimit taxCreditLimit : taxCreditLimits) {
-            log.debug("[TaxCreditFactory] TaxCreditLimit={}", taxCreditLimit.getClass());
             if(taxCreditLimit.isSatisIedBy(totalAmount)){
                 return taxCreditLimit;
             }
         }
-        return null;
+        throw new IllegalAccessException("잘못된 요청입니다.");
     }
 }

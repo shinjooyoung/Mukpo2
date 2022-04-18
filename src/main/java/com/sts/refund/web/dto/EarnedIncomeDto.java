@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 근로소득 DTO
+ */
 @Getter
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,6 +24,11 @@ public class EarnedIncomeDto {
         this.totalAmount = totalAmount;
     }
 
+    /**
+     * EarnedIncome Entity를 EarnedIncomeDto로 변환
+     * @param earnedIncome 
+     * @return
+     */
     public static EarnedIncomeDto of(EarnedIncome earnedIncome){
         return builder()
                 .calculatedAmount(earnedIncome.getCalculatedAmount())
@@ -28,6 +36,10 @@ public class EarnedIncomeDto {
                 .build();
     }
 
+    /**
+     * EarnedIncome Entity로 변환
+     * @return 
+     */
     public EarnedIncome toEntity(){
         return EarnedIncome.builder()
                 .calculatedAmount(calculatedAmount)

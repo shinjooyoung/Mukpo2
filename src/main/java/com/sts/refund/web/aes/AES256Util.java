@@ -8,6 +8,9 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * AES256 암호화 및 복호화 클래스
+ */
 @Component
 public class AES256Util {
     public final String alg = "AES/CBC/PKCS5Padding";
@@ -31,7 +34,7 @@ public class AES256Util {
     }
 
     /**
-     * 암호 해독
+     * 복호화
      * @param cipherText
      * @return
      * @throws Exception

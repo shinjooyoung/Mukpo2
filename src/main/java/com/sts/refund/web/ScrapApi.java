@@ -15,12 +15,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.io.BufferedReader;
 
+/**
+ * 스크랩 API 호출 클래스
+ */
 @Component
 public class ScrapApi {
 
     private final String SCRAP_URL = "https://codetest.3o3.co.kr/v1/scrap";
 
-    public synchronized Map<String, Object> requestScrap(String name, String regNo) throws Exception  {
+    /**
+     * 스크랩 데이터 요청
+     * @param name 
+     * @param regNo
+     * @return
+     * @throws Exception
+     */
+    public Map<String, Object> requestScrap(String name, String regNo) throws Exception  {
 
         Map<String, Object> body = new HashMap<>();
         body.put("name",name);
@@ -42,7 +52,7 @@ public class ScrapApi {
         String bodyStr = mapper.writeValueAsString(body);
 
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-        wr.write(bodyStr); //json 형식의 message 전달
+        wr.write(bodyStr);
         wr.flush();
 
         StringBuilder sb = new StringBuilder();

@@ -10,6 +10,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ * 근로소득 도메인 클래스
+ */
 @NoArgsConstructor
 @Getter
 @Entity

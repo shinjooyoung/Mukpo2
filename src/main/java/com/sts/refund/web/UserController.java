@@ -17,12 +17,22 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 유저 정보 관련 컨트롤러
+ */
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
+    /**
+     * 회원가입 매핑
+     * @param userDto
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/szs/signup")
     public ResponseEntity save(@Valid @RequestBody UserDto userDto, HttpServletResponse response) throws Exception {
 
@@ -33,8 +43,16 @@ public class UserController {
         return new ResponseEntity(stsResponse, HttpStatus.OK);
     }
 
+    /**
+     * 회원정보 조회 매핑
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/szs/me")
     public ResponseEntity find(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
         String userId = request.getAttribute("userId").toString();
         Map<String, Object> userMap = userService.findUser(userId);
 
@@ -42,10 +60,22 @@ public class UserController {
         return new ResponseEntity(stsResponse, HttpStatus.OK);
     }
 
+    /**
+     * 스크랩 데이터 요청 매핑
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/szs/scrap")
-    public Map<String, Object> findScrap(HttpServletRequest request) throws Exception {
+    public StsResponse findScrap(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
         String userId = request.getAttribute("userId").toString();
-        return userService.getScrap(userId);
+
+        Map<String, Object> data = userService.getScrap(userId);
+
+        StsResponse<Map<String, Object>> stsResponse = StsResponse.response(response.getStatus(),"동기스크랩", data);
+
+        return stsResponse;
     }
 
 }

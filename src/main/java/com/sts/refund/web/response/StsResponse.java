@@ -3,6 +3,10 @@ package com.sts.refund.web.response;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * API 응답 클래스
+ * @param <T> 
+ */
 @Getter
 @Builder
 public class StsResponse<T> {

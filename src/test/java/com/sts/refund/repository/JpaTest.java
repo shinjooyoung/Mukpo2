@@ -108,8 +108,8 @@ class JpaTest {
     }
 
     @Test
-    @DisplayName("유저 조회")
-    void findUser() {
+    @DisplayName("비밀번호 조회")
+    void findPassword() {
 
         //given
         String userId = "hong12";
@@ -121,7 +121,6 @@ class JpaTest {
         assertThat(dbUser.getRegNo()).isEqualTo("860824-1655068");
         assertThat(dbUser.getEarnedIncome().getTotalAmount()).isEqualTo(100);
     }
-
 
     @AfterEach
     void after() {

@@ -15,6 +15,9 @@ import java.security.Key;
 import java.util.Date;
 
 
+/**
+ * JWT 토큰 생성, 검증 클래스
+ */
 public class JwtTokenProvider {
     // 30분
     private long validationSecond = 60 * 30;
@@ -57,7 +60,7 @@ public class JwtTokenProvider {
             return Jwts.parserBuilder()
                     .setSigningKey(getSigninKey(SECRET_KEY))
                     .build()
-                    .parseClaimsJws(token.substring("Bearer ".length()))
+                    .parseClaimsJws(token)
                     .getBody();
         } catch(ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
             e.printStackTrace();
@@ -98,10 +101,12 @@ public class JwtTokenProvider {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setHeaderParam("typ", "JwtToken")
+                .setHeaderParam("typ", "JWT")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expireTime))
                 .signWith(getSigninKey(SECRET_KEY), SignatureAlgorithm.HS256)
                 .compact();
     }
+
+
 }

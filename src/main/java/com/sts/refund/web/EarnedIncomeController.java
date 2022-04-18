@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * 환급액 관련 처리 컨트롤러
+ */
 @RestController
 @RequiredArgsConstructor
 public class EarnedIncomeController {
@@ -19,6 +23,13 @@ public class EarnedIncomeController {
     private final UserService userService;
     private final EarnedIncomeService earnedIncomeService;
 
+    /**
+     * 환급액 매핑
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/szs/refund")
     public Map<String, String> refund(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -26,11 +37,10 @@ public class EarnedIncomeController {
 
         UserDto userDto = userService.findByUserId(userId);
 
-        long refund = earnedIncomeService.calculateRefundAmount(userDto);
-        long taxCreditLimit = earnedIncomeService.calculateTaxCreditLimit(userDto);
-        long taxCredit = earnedIncomeService.calculateTaxCredit(userDto);
+        int refund = earnedIncomeService.calculateRefundAmount(userDto.getEarnedIncomeDto());
+        int taxCreditLimit = earnedIncomeService.calculateTaxCreditLimit(userDto.getEarnedIncomeDto());
+        int taxCredit = earnedIncomeService.calculateTaxCredit(userDto.getEarnedIncomeDto());
 
-        //토큰 셋팅
         Map<String, String> map = new HashMap<>();
         map.put("이름", userDto.getName());
         map.put("한도", convertMoney(taxCreditLimit));
@@ -40,33 +50,35 @@ public class EarnedIncomeController {
         return map;
     }
 
-    private String convertMoney(long money) {
-        String[] han1 = { "", "일","이","삼", "사", "오", "육", "칠", "팔", "구" };
-        String[] han2 = { "", "십", "백", "천" };
-        String[] han3 = { "", "만", "억", "조", "경" };
+    /**
+     * 금액 한글단위로 변환
+     * @param money
+     * @return
+     */
+    private String convertMoney(int money) {
+        int inputNumber = money;
 
-        StringBuffer result = new StringBuffer();
-        String moneyStr = String.valueOf(money);
-        int length = moneyStr.length();
-        int initInt=0;
+        String[] unitWords = { "", "만", "억", "조", "경" };
+        int splitUnit = 10000;
+        int splitCount = unitWords.length;
+        int[] resultArray = new int[String.valueOf(money).length()];
+        String resultString = "";
 
-        for (int i = length-1; i >= 0; i--) {
-            initInt=Integer.parseInt(String.valueOf(moneyStr.charAt(length-i-1)));
-
-            if (initInt > 0) {
-                result.append(han1[initInt]);
-                result.append(han2[i % 4]); // 십,백,천
-
-            }
-            // 만, 억, 조 ,경 단위
-            if (i % 4 == 0) {
-                result.append(han3[i / 4]); // 천단위
-                result.append(" ");
-            }
-
+        for (int i = 0; i < splitCount; i++) {
+            int unitResult = (int) ((inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i));
+            unitResult = (int) Math.floor(unitResult);
+            resultArray[i] = unitResult;
         }
-        result.append("원");
-        return result.toString();
+        DecimalFormat decFormat = new DecimalFormat(",###");
+        for (int i = 0; i < resultArray.length; i++) {
+            if (resultArray[i] == 0) continue;
+            resultString = ((decFormat.format(resultArray[i])) + unitWords[i]+ " " + resultString) + "";
+        }
+
+        resultString = resultString.replace(",","천 ");
+        resultString = resultString.substring(0, resultString.length() - 1) + "원";
+
+        return resultString.replace(" 000원", "원");
     }
 
 

@@ -8,6 +8,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ * 회원 도메인 클래스
+ */
 @NoArgsConstructor
 @Getter
 @Entity

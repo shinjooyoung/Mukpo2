@@ -1,31 +1,49 @@
 package com.sts.refund.service;
 
 import com.sts.refund.domain.*;
-import com.sts.refund.web.dto.UserDto;
+import com.sts.refund.web.dto.EarnedIncomeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * 근로소득 서비스
+ */
 @Service
 @RequiredArgsConstructor
 public class EarnedIncomeService {
 
     private final TaxCreditFactory taxCreditFactory;
 
-    public long calculateRefundAmount(UserDto userDto) {
-        EarnedIncome earnedIncome = userDto.toEntity().getEarnedIncome();
-        return earnedIncome.calculateRefundAmount(
-                taxCreditFactory.createTaxCredit(earnedIncome.getCalculatedAmount()),
-                taxCreditFactory.createTaxCreditLimit(earnedIncome.getTotalAmount()));
+    /**
+     * 환급액 계산 서비스
+     * @param earnedIncomeDto
+                * @return
+     * @throws IllegalAccessException
+                */
+        public int calculateRefundAmount(EarnedIncomeDto earnedIncomeDto) throws IllegalAccessException {
+            return earnedIncomeDto.toEntity().calculateRefundAmount(
+                taxCreditFactory.createTaxCredit(earnedIncomeDto.getCalculatedAmount()),
+                taxCreditFactory.createTaxCreditLimit(earnedIncomeDto.getTotalAmount()));
     }
 
-    public long calculateTaxCredit(UserDto userDto) {
-        EarnedIncome earnedIncome = userDto.toEntity().getEarnedIncome();
-        return earnedIncome.calculateTaxCredit(taxCreditFactory.createTaxCredit(earnedIncome.getCalculatedAmount()));
+    /**
+     * 세액공제 계산 서비스
+     * @param earnedIncomeDto 
+     * @return
+     * @throws IllegalAccessException
+     */
+    public int calculateTaxCredit(EarnedIncomeDto earnedIncomeDto) throws IllegalAccessException {
+        return earnedIncomeDto.toEntity().calculateTaxCredit(taxCreditFactory.createTaxCredit(earnedIncomeDto.getCalculatedAmount()));
     }
 
-    public long calculateTaxCreditLimit(UserDto userDto) {
-        EarnedIncome earnedIncome = userDto.toEntity().getEarnedIncome();
-        return earnedIncome.calculateTaxCreditLimit(taxCreditFactory.createTaxCreditLimit(earnedIncome.getTotalAmount()));
+    /**
+     * 세액공제 한도 계산 서비스
+     * @param earnedIncomeDto 
+     * @return
+     * @throws IllegalAccessException
+     */
+    public int calculateTaxCreditLimit(EarnedIncomeDto earnedIncomeDto) throws IllegalAccessException {
+        return earnedIncomeDto.toEntity().calculateTaxCreditLimit(taxCreditFactory.createTaxCreditLimit(earnedIncomeDto.getTotalAmount()));
     }
 
 }

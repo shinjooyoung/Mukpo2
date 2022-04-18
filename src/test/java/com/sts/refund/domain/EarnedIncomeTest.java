@@ -21,7 +21,7 @@ class EarnedIncomeTest {
 
     @Test
     @DisplayName("세액공제 한도 3300만원 이하")
-    void calculateTaxCreditLimit1() {
+    void calculateTaxCreditLimit1() throws IllegalAccessException {
         // given
         TaxCreditLimit belowValue = taxCreditFactory.createTaxCreditLimit(28000000);
 
@@ -30,12 +30,11 @@ class EarnedIncomeTest {
 
         // then
         assertThat(below).isEqualTo(740000);
-
     }
 
     @Test
     @DisplayName("세액공제 한도 3300만원 초과 7000만 이하 이하")
-    void calculateTaxCreditLimit2() {
+    void calculateTaxCreditLimit2() throws IllegalAccessException {
         // given
         TaxCreditLimit middleValue = taxCreditFactory.createTaxCreditLimit(50000000);
 
@@ -49,7 +48,7 @@ class EarnedIncomeTest {
 
     @Test
     @DisplayName("세액공제 한도 7000만원 초과")
-    void calculateTaxCreditLimit3() {
+    void calculateTaxCreditLimit3() throws IllegalAccessException {
         // given
         TaxCreditLimit excessValue = taxCreditFactory.createTaxCreditLimit(90000000);
 
@@ -63,7 +62,7 @@ class EarnedIncomeTest {
 
     @Test
     @DisplayName("세액공제 130만원 이하 테스트")
-    void calculateTaxCredit1() {
+    void calculateTaxCredit1() throws IllegalAccessException {
         // given
         TaxCredit belowValue = taxCreditFactory.createTaxCredit(1000000);
 
@@ -76,7 +75,7 @@ class EarnedIncomeTest {
 
     @Test
     @DisplayName("세액공제 130만원 초과 테스트")
-    void calculateTaxCredit2() {
+    void calculateTaxCredit2() throws IllegalAccessException {
         // given
         TaxCredit excessValue = taxCreditFactory.createTaxCredit(1500000);
 
@@ -89,7 +88,7 @@ class EarnedIncomeTest {
 
     @Test
     @DisplayName("환급액 계산")
-    void calculateRefundAmount() {
+    void calculateRefundAmount() throws IllegalAccessException {
         // given
         EarnedIncome earnedIncome = EarnedIncome.builder()
                 .totalAmount(40000000)

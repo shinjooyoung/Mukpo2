@@ -2,6 +2,9 @@ package com.sts.refund.domain.taxcreditlimit;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * 세액공제 한도 계산 클래스, 총 급여가 3300만원 이하일때
+ */
 @Component
 public class BelowValueTaxCreditLimit implements TaxCreditLimit{
     @Override
