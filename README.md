@@ -10,7 +10,7 @@ Java11, SpringBoot 2.6.6, JPA, Spring Security, OAuth2, JWT, AWS
 
 출발점을 을 찾기 위한 도메인 설계 구현을 하면서 수정, 추가, 제거 될 수 있다.
 
-![image](https://user-images.githubusercontent.com/32383284/164370454-678482b1-902b-4d67-af0a-f3023d307df5.png)
+![image](https://user-images.githubusercontent.com/32383284/164371064-ea99013f-6e9a-4140-a636-5d913a70ccac.png)
 
 ### 도메인 책임 할당
 
