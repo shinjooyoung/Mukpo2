@@ -4,7 +4,7 @@
 
 ## 필수 적용 기술
 
-Java11, SpringBoot 2.6.6, JPA, Spring Security, OAuth2.0, JWT, AWS, Docker
+Java11, SpringBoot 2.6.6, JPA, Spring Security, OAuth2.0, JWT, AWS, Docker, TDD
 
 ## 도메인 모델
 
